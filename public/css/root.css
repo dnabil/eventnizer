@@ -1,0 +1,75 @@
+:root {
+    --cream: #fff7ef;
+    --white: #ffffff;
+    --blue: #2367b1;
+    --pink: #f48879;
+}
+
+.bg-cream {
+    background-color: var(--cream);
+}
+
+:root,
+body {
+    font-family: "Inter", sans-serif;
+}
+@supports (font-variation-settings: normal) {
+    :root {
+        font-family: "Inter var", sans-serif;
+    }
+}
+
+/* navbar */
+.navbar-img {
+    height: auto;
+    width: 150px;
+}
+a#menjadi-mitra,
+a#login,
+button#register {
+    font-size: 17px;
+    font-weight: 600;
+}
+a#menjadi-mitra {
+    color: #808080;
+
+    text-decoration: none; /* removes underline */
+}
+a#login {
+    color: var(--blue);
+
+    text-decoration: none; /* removes underline */
+}
+button#register {
+    background-color: var(--blue);
+    color: var(--white);
+    padding: 10px 15px;
+    border-radius: 10px;
+}
+.navbar-nav > li {
+    padding-left: 30px;
+    padding-right: 30px;
+}
+/* endof navbar */
+
+button,
+.btn,
+.btn-pink,
+.btn-white {
+    border: 0px;
+    padding: 0.8em 1.2em;
+    font-weight: 525;
+}
+
+button,
+.btn {
+    background-color: var(--pink);
+    color: white;
+    border-radius: 10px;
+}
+
+.btn-white {
+    background-color: white;
+    color: var(--pink);
+    border: 1px solid var(--pink);
+}
