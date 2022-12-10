@@ -33,11 +33,14 @@ Route::post('/register-merchant', [MerchantController::class, 'create'])->middle
 
 Route::get('/merchant/{Merchant:slug}', [MerchantController::class, 'index']); //profil merchant
 Route::get('/merchant-edit', [MerchantController::class, 'editView']); //khusus merchant
-Route::get('/product', [ProductController::class, 'index']);
+Route::get('/product/{Product:slug}', [ProductController::class, 'index']);
 
 Route::get('/product-add', [ProductController::class, 'create']);
 Route::post('/product-add', [ProductController::class, 'store']);
 Route::post('/product-delete', [ProductController::class, 'destroy']);
+
+Route::get('/product-update', [ProductController::class, 'updateView']);
+Route::post('/product-update', [ProductController::class, 'update']);
 
 
 // Route::get('/debug', function () {

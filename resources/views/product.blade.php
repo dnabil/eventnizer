@@ -7,52 +7,28 @@
                 <div class="row ">
                     {{-- photo&TITLE --}}
                     <div class="d-flex gap-3 border-bottom ">
-                        <img src="/img/merchant/default.jpg" alt="foto merchant"
+                        <img src="{{ $product->merchant->photo }}" alt="foto merchant"
                             style="width:100px; height: 100px; object-fit:scale-down;" class="rounded-circle">
                         <div class="row">
-                            <h2 class="mb-1">Judul Produk</h2>
-                            <p class="mb-1">by-<b>nama toko</b>(TITLE)</p>
-                            <p class="mb-1">Lokasi: Kota, Provinsi</p>
+                            <h2 class="mb-1">{{ $product->name }}</h2>
+                            <p class="mb-1">by-<a
+                                    href="/merchant/{{ $product->merchant->slug }}"><b>{{ $product->merchant->name }}</b></a>
+                            </p>
+                            <p class="mb-1">Lokasi:
+                                {{ Str::title(sprintf('%s, %s', $product->merchant->city->name, $product->merchant->province->name)) }}
+                            </p>
                         </div>
                     </div>
 
                     <div class="d-flex gap-5 justify-content-center">
-                        <img class="rounded img-fluid p-5" src="/img/product/default.jpg" alt="">
+                        <img class="rounded img-fluid p-5" src="{{ $product->photo }}" alt="">
                     </div>
 
                     <div class="p-3">
                         <h3>Deskripsi</h3>
 
                         <p id="deskripsi">
-                            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Recusandae quisquam, natus inventore
-                            facilis,
-                            exercitationem laudantium dolorem quam, voluptatibus illum est amet asperiores sed animi dolorum
-                            quibusdam iusto eligendi libero modi pariatur vel hic iure earum adipisci. Autem labore quae
-                            incidunt
-                            dolore culpa dignissimos fugiat nostrum, voluptas cumque adipisci illum architecto deleniti
-                            blanditiis
-                            aspernatur expedita obcaecati ut, cupiditate, consequuntur sint accusamus ipsum. Aliquam libero,
-                            quia ab
-                            ad soluta, dicta consequuntur provident aperiam, in maiores sint dignissimos ipsum quaerat
-                            laudantium
-                            ratione sapiente laborum porro. Cupiditate ad amet molestiae suscipit corporis quas doloremque
-                            error
-                            quibusdam odit voluptate, non obcaecati dicta! Adipisci quae itaque dolorum omnis dolor debitis
-                            dolorem
-                            officiis ex voluptatem, nesciunt sunt facilis corporis doloremque quidem quos, dolore, eligendi
-                            quod
-                            obcaecati qui ratione saepe cupiditate fugit repellendus! Doloribus officia modi tempore
-                            perferendis
-                            dolores debitis odio adipisci hic, praesentium commodi fugit necessitatibus deserunt blanditiis
-                            aperiam
-                            fugiat similique ea pariatur a nisi exercitationem ducimus quaerat minus. Ratione tempore dolor
-                            sapiente
-                            est, doloribus nobis ipsum itaque, eos odit unde obcaecati voluptas iusto accusamus cupiditate
-                            dolorem
-                            assumenda autem ipsa tenetur? Fugiat ipsum nihil adipisci suscipit nostrum voluptates tempore
-                            accusantium repellat facilis molestias aperiam iste molestiae quibusdam delectus laborum
-                            commodi,
-                            voluptas labore. Temporibus repellendus hic veniam facilis?
+                            {!! nl2br($product->description) !!}
                         </p>
                     </div>
 
@@ -68,7 +44,7 @@
                     <p class="fs-3 fw-bold">
                         Harga
                     </p>
-                    <p class="fs-22"> IDR - hrgproduk,-</p>
+                    <p class="fs-22"> Rp {{ number_format($product->max_price, 2, ',', '.') }}</p>
 
                     <div class="d-flex flex-column ">
                         <button class="btn-white col-12 mb-3">Chat</button>

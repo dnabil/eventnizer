@@ -3,10 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Models\Product;
-use App\Http\Requests\StoreProductRequest;
-use App\Http\Requests\UpdateProductRequest;
+use App\Models\Merchant;
 use Illuminate\Http\Request;
+use App\Http\Requests\StoreProductRequest;
 use Symfony\Component\VarDumper\VarDumper;
+use App\Http\Requests\UpdateProductRequest;
+use Illuminate\Contracts\Support\ValidatedData;
 
 class ProductController extends Controller
 {
@@ -15,10 +17,13 @@ class ProductController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index($slug)
     {
+        $product = Product::with(['merchant', 'merchant.province', 'merchant.city', 'merchant.district'])->where('slug', $slug)->first();
+
         return view('product', [
-            'title' => 'nama produk | eventnizer'
+            'title' => 'nama produk | eventnizer',
+            'product' => $product
         ]);
     }
 
@@ -88,9 +93,35 @@ class ProductController extends Controller
      * @param  \App\Models\Product  $product
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateProductRequest $request, Product $product)
+    public function update(Request $request)
     {
-        //
+        $validatedData = $request->validate([
+            'name' => 'required|max:50',
+            'description' => 'required|min:50',
+            'min_price' => 'required|numeric',
+            'max_price' => 'required|numeric'
+        ]);
+
+        $p = Product::where('slug', $request->slug)->first()->update($validatedData);
+
+        return redirect('/merchant-edit')->with('success', 'produk berhasil diedit');
+    }
+    public function updateView(Request $request)
+    {
+        $slug = $request->slug;
+
+        $product = Product::with('merchant')->where('slug', $slug)->first();
+        $merchantFromSlug = $product->merchant;
+        $merchantfromAuth = auth()->user()->merchant;
+
+        if ($merchantfromAuth->id != $merchantFromSlug->id) {
+            return redirect('/merchant-edit')->with('error', 'unauthorized');
+        }
+
+        return view('product.update', [
+            'title' => 'update produk | eventnizer',
+            'product' => $product
+        ]);
     }
 
     /**

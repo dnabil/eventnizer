@@ -8,6 +8,7 @@ use App\Http\Requests\StoreMerchantRequest;
 use App\Http\Requests\UpdateMerchantRequest;
 use App\Models\MerchantVerification;
 use Illuminate\Support\Arr;
+use PhpParser\Node\Stmt\TryCatch;
 
 class MerchantController extends Controller
 {
@@ -21,13 +22,12 @@ class MerchantController extends Controller
     }
     public function editView()
     {
-        $merchant = auth()->user()->merchant->with('product')->get();
-        if ($merchant == null) {
-            return view('home', [
-                'title' => 'Eventnizer | Realisasikan mimpimu!',
-            ]);
+        $user = auth()->user();
+        try {
+            $merchant = $user->merchant->where('id', $user->id)->with('product')->first();
+        } catch (\Throwable $th) {
+            return redirect('/')->with('error', 'Anda bukan mitra/merchant');
         }
-
         return view('merchant.edit', [
             'title' => 'edit mitra | eventnizer',
             'merchant' => $merchant
@@ -79,7 +79,7 @@ class MerchantController extends Controller
      */
     public function index($slug)
     {
-        $merchant = Merchant::with(['province', 'city', 'district', 'user'])->where('slug', $slug)->first();
+        $merchant = Merchant::with(['province', 'city', 'district', 'user', 'product'])->where('slug', $slug)->first();
         return view('merchant-profile', [
             'title' => $merchant->name . " | eventnizer",
             'merchant' => $merchant

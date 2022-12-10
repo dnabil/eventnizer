@@ -15,7 +15,7 @@ class HomeController extends Controller
             "promos" => Promo::all(),
             "productTops" => [],
             'caterings' => [],
-            'randoms' => Product::inRandomOrder()->limit(5)->get()
+            'randoms' => Product::inRandomOrder()->limit(10)->get()
         ]);
     }
 }

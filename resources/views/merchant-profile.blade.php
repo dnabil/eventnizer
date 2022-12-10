@@ -6,28 +6,25 @@
     @endphp
 
     <style>
+        #product-heading {
+            margin-top: 20px;
+            margin-bottom: 20px;
+        }
+
         @media only screen and (max-width: 600px) {
 
             #product-wrapper {
                 justify-content: center !important;
             }
-
-            #product-heading {
-                margin-top: 10px;
-                margin-bottom: 10px;
-                text-align: center;
-            }
         }
 
-        @media only screen and (max-width: 1000px) {
+        @media only screen and (max-width: 1200px) {
 
             #product-wrapper {
                 justify-content: space-around !important;
             }
 
             #product-heading {
-                margin-top: 10px;
-                margin-bottom: 10px;
                 text-align: center;
             }
         }
@@ -49,8 +46,9 @@
                 </div>
 
                 {{-- teks --}}
-                <p class="my-4">Kami menyediakan venue dan dekorasi untuk acara perayaan seperti
-                    pertunangan, pernikahan, ulang tahun, pertemuan penting, dan lain-lain.</p>
+                <p class="my-4">
+                    {{ $merchant->description }}
+                </p>
                 <p class="fw-bold">Kontak </p>
                 <div>
                     <span>
@@ -77,84 +75,13 @@
                         </div>
                         <br>
                         <h2 id="product-heading">Semua Produk</h2>
-                        <div id="product-wrapper" class="row justify-content-between">
-                            <div class="card mb-5" style="width: 18rem;">
-                                <img src="/img/product/default.jpg" class="card-img-top" alt="...">
-                                <div class="card-body">
-                                    <p class="card-text">Some quick example text to build on the card title and make up
-                                        the
-                                        bulk of the card's content.</p>
-                                </div>
-                            </div>
-                            <div class="card mb-5" style="width: 18rem;">
-                                <img src="/img/product/default.jpg" class="card-img-top" alt="...">
-                                <div class="card-body">
-                                    <p class="card-text">Some quick example text to build on the card title and make up
-                                        the
-                                        bulk of the card's content.</p>
-                                </div>
-                            </div>
-                            <div class="card mb-5" style="width: 18rem;">
-                                <img src="/img/product/default.jpg" class="card-img-top" alt="...">
-                                <div class="card-body">
-                                    <p class="card-text">Some quick example text to build on the card title and make up
-                                        the
-                                        bulk of the card's content.</p>
-                                </div>
-                            </div>
-
-                            <div class="card mb-5" style="width: 18rem;">
-                                <img src="/img/product/default.jpg" class="card-img-top" alt="...">
-                                <div class="card-body">
-                                    <p class="card-text">Some quick example text to build on the card title and make up
-                                        the
-                                        bulk of the card's content.</p>
-                                </div>
-                            </div>
-                            <div class="card mb-5" style="width: 18rem;">
-                                <img src="/img/product/default.jpg" class="card-img-top" alt="...">
-                                <div class="card-body">
-                                    <p class="card-text">Some quick example text to build on the card title and make up
-                                        the
-                                        bulk of the card's content.</p>
-                                </div>
-                            </div>
-                            <div class="card mb-5" style="width: 18rem;">
-                                <img src="/img/product/default.jpg" class="card-img-top" alt="...">
-                                <div class="card-body">
-                                    <p class="card-text">Some quick example text to build on the card title and make up
-                                        the
-                                        bulk of the card's content.</p>
-                                </div>
-                            </div>
-
-                            <div class="card mb-5" style="width: 18rem;">
-                                <img src="/img/product/default.jpg" class="card-img-top" alt="...">
-                                <div class="card-body">
-                                    <p class="card-text">Some quick example text to build on the card title and make up
-                                        the
-                                        bulk of the card's content.</p>
-                                </div>
-                            </div>
-                            <div class="card mb-5" style="width: 18rem;">
-                                <img src="/img/product/default.jpg" class="card-img-top" alt="...">
-                                <div class="card-body">
-                                    <p class="card-text">Some quick example text to build on the card title and make up
-                                        the
-                                        bulk of the card's content.</p>
-                                </div>
-                            </div>
-                            <div class="card mb-5" style="width: 18rem;">
-                                <img src="/img/product/default.jpg" class="card-img-top" alt="...">
-                                <div class="card-body">
-                                    <p class="card-text">Some quick example text to build on the card title and make up
-                                        the
-                                        bulk of the card's content.</p>
-                                </div>
-                            </div>
-
-
-
+                        <div id="product-wrapper" class="row justify-content-evenly">
+                            @foreach ($merchant->product as $product)
+                                <x-product-card title="{{ $product->name }}" description="{{ $product->description }}"
+                                    photo="{{ $product->photo }}" minPrice="{{ $product->min_price }}"
+                                    maxPrice="{{ $product->max_price }}"
+                                    link="{{ sprintf('/product/%s', $product->slug) }}" />
+                            @endforeach
                         </div>
                     </div>
                 </div>
