@@ -1,10 +1,6 @@
 @extends('layout.main')
 
 @section('container')
-    @php
-        $merchant = $merchant->first();
-    @endphp
-
     <style>
         #product-heading {
             margin-top: 20px;
