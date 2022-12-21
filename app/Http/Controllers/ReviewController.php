@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Review;
 use App\Http\Requests\StoreReviewRequest;
 use App\Http\Requests\UpdateReviewRequest;
+use App\Models\OrderHistory;
 
 class ReviewController extends Controller
 {
@@ -36,7 +37,27 @@ class ReviewController extends Controller
      */
     public function store(StoreReviewRequest $request)
     {
-        //
+
+        $validatedData = $request->validate(
+            $request->rules()
+        );
+        $user = auth()->user();
+        $orderHistory = OrderHistory::where('slug', $request->slug)->with('product')->first();
+        if ($user->id != $orderHistory->user_id) {
+            return redirect()->back()->with('error', "order history doesn't exists");
+        }
+
+        $validatedData['user_id'] = $user->id;
+        $validatedData['product_id'] = $orderHistory->product_id;
+        $validatedData['order_history_id'] = $orderHistory->id;
+
+        $review = Review::where('order_history_id', $orderHistory->id)->first();
+        if ($review == null) {
+            $review = Review::create($validatedData);
+        } else {
+            $review->update($validatedData);
+        }
+        return $review;
     }
 
     /**

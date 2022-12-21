@@ -25,7 +25,7 @@ body {
     width: 150px;
 }
 a#menjadi-mitra,
-a#login,
+button#login,
 button#register {
     font-size: 17px;
     font-weight: 600;
@@ -35,7 +35,7 @@ a#menjadi-mitra {
 
     text-decoration: none; /* removes underline */
 }
-a#login {
+button#login {
     color: var(--blue);
 
     text-decoration: none; /* removes underline */

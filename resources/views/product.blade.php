@@ -31,8 +31,6 @@
                             {!! nl2br($product->description) !!}
                         </p>
                     </div>
-
-
                 </div>
 
             </div>
@@ -48,7 +46,10 @@
 
                     <div class="d-flex flex-column ">
                         <button class="btn-white col-12 mb-3">Chat</button>
-                        <button class="btn col-12">Beli</button>
+                        <button id="buyButton" type="button" class="btn col-12" data-bs-toggle="modal"
+                            data-bs-target="#beliModal">
+                            Beli
+                        </button>
                     </div>
                 </div>
 
@@ -73,4 +74,51 @@
         </div>
 
     </div>
+
+
+    {{-- MODAL for BELI BUTTON --}}
+    <div class="modal fade" id="beliModal" tabindex="-1" aria-labelledby="beliModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="d-flex justify-content-end p-2 pb-0">
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+
+                <div class="modal-body pt-0">
+                    <h1 class="modal-title fs-5 fw-bolder text-center mb-3" id="exampleModalLabel">Pesan Sekarang</h1>
+                    <form action="/oh-buy" method="POST" class="d-flex gap-3 flex-column align-items-center">
+                        @csrf
+                        <input type="hidden" name="slug" class="invisible" value="{{ $product->slug }}">
+                        <h2 class="btn btn-pink">{{ $product->name }}</h2>
+                        <p>Mohon lengkapi tanggal layanan anda</p>
+                        <div class="text-center">
+                            <label for="eventDate">Tanggal Layanan</label><br>
+                            <input type="datetime-local" class="form-control" name="eventDate" id="eventDate">
+                            @error('eventDate')
+                                <div class="invalid-feedback d-block">
+                                    {{ $message }}
+                                </div>
+                            @enderror
+                        </div>
+
+
+                        <div class="m-4">
+                            <button type="submit" class="btn">Bayar Lunas - IDR
+                                {{ number_format($product->max_price, 0, ',', '.') }} </button>
+                        </div>
+                    </form>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        var errorData = document.getElementsByClassName("invalid-feedback");
+        console.log(errorData);
+        if (errorData.length > 0) {
+            document.getElementById("buyButton").click();
+        }
+    </script>
+    {{-- endof MODAL for BELI BUTTON --}}
 @endsection

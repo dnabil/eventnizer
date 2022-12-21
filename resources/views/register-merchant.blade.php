@@ -2,19 +2,20 @@
 
 @section('container')
     <style>
+        body {
+            background-image: url("img/register_mitra_bg.jpg");
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: cover;
+            height: 100%;
+        }
+
         .registrasi {
             max-width: fit-content;
             padding: 20px;
             border-radius: 12px;
             background: white;
             box-shadow: 2px 2px 25px 1px;
-        }
-
-        @media(max-width: 1400px) {
-            .img-registrasi {
-                display: none;
-                width: 1px;
-            }
         }
 
         .registrasi h1 {
@@ -73,7 +74,7 @@
 
     <div class="d-flex justify-content-center align-items-center my-5">
         <div class="registrasi text-center col-xl-5 col-md-12 ">
-            <h1>Registrasi Mitra</h1>
+            <h1>Create Your Business Profile</h1>
 
             <form action="/register-merchant" method="POST">
                 @csrf
@@ -147,7 +148,7 @@
                     </div>
                 </div>
 
-                <input class="button button-pink" type="submit" value="Masuk" />
+                <input class="button button-pink" type="submit" value="Start" />
             </form>
 
             <div class="batalRegistrasi">

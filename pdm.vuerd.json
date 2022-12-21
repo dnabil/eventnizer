@@ -3,9 +3,9 @@
     "version": "2.2.11",
     "width": 2000,
     "height": 2000,
-    "scrollTop": -763.1999999999996,
-    "scrollLeft": -485.6093750000005,
-    "zoomLevel": 0.3,
+    "scrollTop": -531.2000000000053,
+    "scrollLeft": -894.3999999999986,
+    "zoomLevel": 1,
     "show": {
       "tableComment": true,
       "columnComment": true,
@@ -667,7 +667,7 @@
             "id": "3e1ee079-665b-4b94-bf4a-d2d940af7a05"
           },
           {
-            "name": "is_validated",
+            "name": "is_paid",
             "comment": "",
             "dataType": "BOOL",
             "default": "FALSE",
@@ -682,7 +682,7 @@
               "pk": false,
               "fk": false,
               "pfk": false,
-              "widthName": 70.65625,
+              "widthName": 60,
               "widthComment": 60,
               "widthDataType": 60,
               "widthDefault": 60
@@ -717,7 +717,7 @@
           "active": false,
           "left": 1024.3425,
           "top": 753.9127,
-          "zIndex": 2,
+          "zIndex": 18,
           "widthName": 87.9853515625,
           "widthComment": 60,
           "color": "#C21ACF"
@@ -1440,7 +1440,7 @@
           "columnIds": [
             "f44da449-ddca-4c3c-bee8-d32c087c6eed"
           ],
-          "x": 1388.7575390625,
+          "x": 1378.1012890625,
           "y": 849.9127,
           "direction": "right"
         },

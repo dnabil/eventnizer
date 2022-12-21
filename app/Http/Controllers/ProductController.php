@@ -88,10 +88,6 @@ class ProductController extends Controller
 
     /**
      * Update the specified resource in storage.
-     *
-     * @param  \App\Http\Requests\UpdateProductRequest  $request
-     * @param  \App\Models\Product  $product
-     * @return \Illuminate\Http\Response
      */
     public function update(Request $request)
     {
@@ -126,9 +122,6 @@ class ProductController extends Controller
 
     /**
      * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Product  $product
-     * @return \Illuminate\Http\Response
      */
     public function destroy(Request $request)
     {

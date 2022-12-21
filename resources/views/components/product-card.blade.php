@@ -27,6 +27,8 @@
     <p>
         <center>
             @php
+                // CURRENCY FORMAT:
+                // number_format($minPrice, 0, ',', '.')
                 echo sprintf('Rp %s <br />~ %s', number_format($minPrice, 0, ',', '.'), number_format($maxPrice, 0, ',', '.'));
             @endphp
         </center>

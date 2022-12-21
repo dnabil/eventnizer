@@ -71,7 +71,7 @@
                                 id="Email Address" placeholder="Email" name="email" required value="{{ old('email') }}" />
                         </div>
                         @error('email')
-                            <div class="invalid-feedback">
+                            <div class="invalid-feedback d-block">
                                 {{ $message }}
                             </div>
                         @enderror
@@ -81,7 +81,7 @@
                                 type="password" id="Password" placeholder="Password" name="password" required />
                         </div>
                         @error('password')
-                            <div class="invalid-feedback">
+                            <div class="invalid-feedback d-block">
                                 {{ $message }}
                             </div>
                         @enderror

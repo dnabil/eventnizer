@@ -3,10 +3,13 @@
 use App\Models\Merchant;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ChatController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\UserController;
-use App\Http\Controllers\MerchantController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\MerchantController;
+use App\Http\Controllers\OrderHistoryController;
+use App\Http\Controllers\ReviewController;
 
 /*
 |--------------------------------------------------------------------------
@@ -33,7 +36,7 @@ Route::post('/register-merchant', [MerchantController::class, 'create'])->middle
 
 Route::get('/merchant/{Merchant:slug}', [MerchantController::class, 'index']); //profil merchant
 Route::get('/merchant-edit', [MerchantController::class, 'editView']); //khusus merchant
-Route::get('/product/{Product:slug}', [ProductController::class, 'index']);
+Route::get('/product/{Product:slug}', [ProductController::class, 'index'])->name('product');
 
 Route::get('/product-add', [ProductController::class, 'create']);
 Route::post('/product-add', [ProductController::class, 'store']);
@@ -42,10 +45,25 @@ Route::post('/product-delete', [ProductController::class, 'destroy']);
 Route::get('/product-update', [ProductController::class, 'updateView']);
 Route::post('/product-update', [ProductController::class, 'update']);
 
+Route::post('/oh-buy', [OrderHistoryController::class, 'buy'])->middleware('auth');
+Route::get('/oh-buy-summary', [OrderHistoryController::class, 'buy2View'])->name('buy-summary')->middleware('auth');
+Route::post('/oh-buy-summary', [OrderHistoryController::class, 'buy2ViewPost'])->middleware('auth');
 
-// Route::get('/debug', function () {
-//     return "berhasil!";
-// });
+Route::get('/oh-buy-payment/{OrderHistory:slug}', [OrderHistoryController::class, 'paymentView'])->middleware('auth');
+
+Route::post('/review', [ReviewController::class, 'store']);
+
+// chat route masih static.
+Route::get('/chat', [ChatController::class, 'viewChat'])->middleware('auth');
+
+
+
+Route::get('/history', [OrderHistoryController::class, 'historyView'])->middleware('auth');
+
+Route::get('/debug', function () {
+    $user = auth()->user();
+    return $user;
+});
 
 
 

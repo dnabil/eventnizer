@@ -11,6 +11,7 @@
     @include('import.root-css')
     @include('import.font')
     @include('import.bootstrap-js')
+    @yield('head')
 
 
 </head>

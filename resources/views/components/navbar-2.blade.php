@@ -38,6 +38,14 @@
                             <span>{{ auth()->user()->fname }}</span>
                         </a>
                     </li>
+                    <li class="nav-item px-1">
+                        <a class="nav-link" href="/history">
+                            <span class="material-symbols-outlined fs-3">
+                                receipt_long
+                            </span>
+                        </a>
+                    </li>
+
                     @if (auth()->user()->merchant != null)
                         <li class="nav-item px-1">
                             <a class="nav-link" href="/merchant-edit">
@@ -48,7 +56,7 @@
                         </li>
                     @endif
                     <li class="nav-item px-1">
-                        <a class="nav-link" href="#">
+                        <a class="nav-link" href="/chat">
                             <span class="material-symbols-outlined fs-3">
                                 comment
                             </span>
