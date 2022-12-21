@@ -57,7 +57,8 @@ class ReviewController extends Controller
         } else {
             $review->update($validatedData);
         }
-        return $review;
+
+        return back(302)->with('success', 'review success');
     }
 
     /**
