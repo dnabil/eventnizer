@@ -5,9 +5,6 @@ namespace App\Http\Controllers;
 use App\Models\Product;
 use App\Models\OrderHistory;
 use Illuminate\Http\Request;
-use App\Http\Requests\StoreOrderHistoryRequest;
-use App\Http\Requests\UpdateOrderHistoryRequest;
-use App\View\Components\productCard;
 
 class OrderHistoryController extends Controller
 {
